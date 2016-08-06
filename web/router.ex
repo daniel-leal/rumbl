@@ -26,6 +26,12 @@ defmodule Rumbl.Router do
     resources "/sessions", SessionController, only: [:new, :create, :delete]
 
     # Videos
+    # resources "/videos", VideoController
+  end
+
+  scope "/manage", Rumbl do
+    pipe_through [:browser, :authenticate_user]
+
     resources "/videos", VideoController
   end
 
