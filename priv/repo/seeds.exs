@@ -9,3 +9,11 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias Rumbl.Repo
+alias Rumbl.Category
+
+for category <- ~w(Action Drama Romance Comedy Sci-fi) do
+  Repo.get_by(Category, name: category) || # verify if the category exists
+    Repo.insert!(%Category{name: category}) # if not, insert the new category
+end
